@@ -11,3 +11,5 @@ void updateMedicineNameUI(DynamicArray* medicineList);
 void updateMedicineConcentrationUI(DynamicArray* medicineList);
 void updateMedicineQuantityUI(DynamicArray* medicineList);
 void updateMedicinePriceUI(DynamicArray* medicineLIst);
+void MedicineShortSupplyUI(DynamicArray* medicineList);
+void UndoUI(DynamicArray* medicineList);

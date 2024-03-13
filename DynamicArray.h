@@ -8,6 +8,12 @@ typedef struct
 	Medicine* elems;
 }DynamicArray;
 
+typedef struct
+{
+	DynamicArray* undoList;
+	DynamicArray* redoList;
+}UndoRedo;
+
 DynamicArray* createDynamicArray(int maxcapacity);
 void destroyDynamicArray(DynamicArray* arr);
 void addElemToDyamicArray(DynamicArray* arr, Medicine elem);

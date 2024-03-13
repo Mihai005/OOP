@@ -41,6 +41,15 @@ int main()
             updateMedicinePriceUI(pharmacy);
             break;
         case 'h':
+            MedicineShortSupplyUI(pharmacy);
+            break;
+        case 'i':
+            UndoUI(pharmacy);
+            break;
+        case 'j':
+            RedoUI(pharmacy);
+            break;
+        case 'k':
             destroyDynamicArray(pharmacy);
             _CrtDumpMemoryLeaks();
             exit(0);
@@ -51,3 +60,11 @@ int main()
 
 	return 0;
 }
+
+/*
+   TO DO:
+   -> Undo / Redo functionality
+   -> Error handling
+   -> Tests
+   -> Bonus week 4?
+*/
