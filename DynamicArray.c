@@ -36,13 +36,13 @@ void resize(DynamicArray* arr)
 	arr->elems = aux;
 }
 
-void addElemToDyamicArray(DynamicArray* arr, Medicine elem)
+/*void addElemToDyamicArray(DynamicArray* arr, Medicine elem)
 {
 	if (arr->capacity == arr->size)
 		resize(arr);
 	arr->elems[arr->size++] = elem;
 }
-
+*/
 int getSize(DynamicArray* arr)
 {
 	if (arr == NULL)

@@ -1,6 +1,8 @@
 #include "ui.h"
 #include "Domain.h"
 #include "DynamicArray.h"
+#include "UndoList.h"
+#include "service.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,9 +12,13 @@
 int main()
 {
     char option;
-    Medicine medicine;
     DynamicArray *pharmacy;
     pharmacy = createDynamicArray(10);
+    UndoList* undoList;
+    undoList = createUndoList(10);
+    UndoList* redoList;
+    redoList = createUndoList(10);
+    defaultpharmacy(pharmacy, undoList);
     do {
         printMenuUI();
         printf("Choose option: ");
@@ -20,28 +26,35 @@ int main()
         switch (option)
         {
         case 'a':
-            addMedicineUI(&medicine, pharmacy);
+            addMedicineUI(pharmacy, undoList);
             break;
         case 'b':
-            deleteMedicineUI(&medicine, pharmacy);
+            deleteMedicineUI(pharmacy, undoList);
             break;
         case 'c':
-            searchMedicineUI(&medicine, pharmacy);
+            searchMedicineUI(pharmacy);
             break;
         case 'd':
-            updateMedicineNameUI(pharmacy);
+            updateMedicineNameUI(pharmacy, undoList);
             break;
         case 'e':
-            updateMedicineConcentrationUI(pharmacy);
+            updateMedicineConcentrationUI(pharmacy, undoList);
             break;
         case 'f':
-            updateMedicineQuantityUI(pharmacy);
+            updateMedicineQuantityUI(pharmacy, undoList);
             break;
         case 'g':
-            updateMedicinePriceUI(pharmacy);
+            updateMedicinePriceUI(pharmacy, undoList);
             break;
         case 'h':
+            UndoUI(pharmacy, undoList);
+            break;
+        case 'i':
+            RedoUI(pharmacy, redoList);
+            break;
+        case 'j':
             destroyDynamicArray(pharmacy);
+            destroyUndoList(undoList);
             _CrtDumpMemoryLeaks();
             exit(0);
         default:

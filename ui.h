@@ -1,13 +1,16 @@
 #pragma once
 #include "DynamicArray.h"
 #include "Domain.h"
+#include "UndoList.h"
 
 void printMenuUI();
 void printMedicine(Medicine* medicine);
-void deleteMedicineUI(Medicine* medicine, DynamicArray* MedicineList);
-void addMedicineUI(Medicine* medicine, DynamicArray* MedicineList);
-void searchMedicineUI(Medicine* medicine, DynamicArray* medicineList);
-void updateMedicineNameUI(DynamicArray* medicineList);
-void updateMedicineConcentrationUI(DynamicArray* medicineList);
-void updateMedicineQuantityUI(DynamicArray* medicineList);
-void updateMedicinePriceUI(DynamicArray* medicineLIst);
+void deleteMedicineUI(DynamicArray* MedicineList, UndoList* undoList);
+void addMedicineUI(DynamicArray* MedicineList, UndoList* undoList);
+void searchMedicineUI(DynamicArray* medicineList);
+void updateMedicineNameUI(DynamicArray* medicineList, UndoList* undoList);
+void updateMedicineConcentrationUI(DynamicArray* medicineList, UndoList* undoList);
+void updateMedicineQuantityUI(DynamicArray* medicineList, UndoList* undoList);
+void updateMedicinePriceUI(DynamicArray* medicineLIst, UndoList* undoList);
+void UndoUI(DynamicArray* medicineList, UndoList* undoList);
+void RedoUI(DynamicArray* medicineList, UndoList* redoList);
