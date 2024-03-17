@@ -29,7 +29,7 @@ int addMedicine(DynamicArray* MedicineList, char* name, int concentration, int q
 	value = check_medicine(name, concentration, quantity, price);
 	if (value == 3)
 		return 3;
-	if(MedicineList->size == MedicineList->capacity)
+	if (MedicineList->size == MedicineList->capacity)
 	{
 		resize(MedicineList);
 	}
@@ -108,7 +108,7 @@ int updateMedicineName(char* name, int concentration, char* new_name, DynamicArr
 {
 	for (int i = 0; i < MedicineList->size; i++)
 	{
-		if (strcmp(MedicineList->elems[i].name, name) == 0 && MedicineList->elems[i].concentration== concentration)
+		if (strcmp(MedicineList->elems[i].name, name) == 0 && MedicineList->elems[i].concentration == concentration)
 		{
 			addUndoList(undoList, MedicineList);
 			MedicineList->elems[i].name = (char*)realloc(MedicineList->elems[i].name, sizeof(char) * (strlen(new_name) + 1));
@@ -173,19 +173,20 @@ void searchMedicine(DynamicArray* MedicineList, char* name, DynamicArray* search
 	}
 }
 
-int Undo(DynamicArray* MedicineList, UndoList* undoList)
+int Undo(DynamicArray* MedicineList, UndoList* undoList, UndoList* redoList)
 {
 	if (undoList->size == 0)
 		return 1;
-	MedicineList->elems = (Medicine*)realloc(MedicineList->elems, sizeof(Medicine) * undoList->array[undoList->size-1].capacity);
+	addUndoList(redoList, MedicineList);
+	MedicineList->elems = (Medicine*)realloc(MedicineList->elems, sizeof(Medicine) * undoList->array[undoList->size - 1].capacity);
 	if (MedicineList->elems == NULL)
 		return 1;
-	MedicineList->size = undoList->array[undoList->size-1].size;
-	MedicineList->capacity = undoList->array[undoList->size-1].capacity;
+	MedicineList->size = undoList->array[undoList->size - 1].size;
+	MedicineList->capacity = undoList->array[undoList->size - 1].capacity;
 
 	for (int i = 0; i < MedicineList->size; i++)
 	{
-		MedicineList->elems[i].concentration= undoList->array[undoList->size-1].elems[i].concentration;
+		MedicineList->elems[i].concentration = undoList->array[undoList->size - 1].elems[i].concentration;
 		MedicineList->elems[i].price = undoList->array[undoList->size - 1].elems[i].price;
 		MedicineList->elems[i].name = undoList->array[undoList->size - 1].elems[i].name;
 		MedicineList->elems[i].quantity = undoList->array[undoList->size - 1].elems[i].quantity;
@@ -198,13 +199,13 @@ int addUndoList(UndoList* list, DynamicArray* arr)
 {
 	if (list->size == list->capacity)
 		resizeUndo(list);
-	list->array[list->size].capacity= arr->capacity;
+	list->array[list->size].capacity = arr->capacity;
 	list->array[list->size].size = arr->size;
 	list->array[list->size].elems = (Medicine*)malloc(sizeof(Medicine) * arr->capacity);
 	if (list->array[list->size].elems == NULL)
 		return 1;
 	for (int i = 0; i < arr->size; i++)
-		{
+	{
 		list->array[list->size].elems[i].name = (char*)malloc(sizeof(char) * (strlen(arr->elems[i].name) + 1));
 		strcpy(list->array[list->size].elems[i].name, arr->elems[i].name);
 		list->array[list->size].elems[i].concentration = arr->elems[i].concentration;
@@ -212,16 +213,16 @@ int addUndoList(UndoList* list, DynamicArray* arr)
 		list->array[list->size].elems[i].price = arr->elems[i].price;
 	}
 	list->size++;
-	for (int i = 0; i < list->size; i++)
-	for (int j=0;j<list->array[i].size;j++)
-	{
-		printf("%s ", list->array[i].elems[j].name);
-		printf("%d ", list->array[i].elems[j].concentration);
-		printf("%d ", list->array[i].elems[j].quantity);
-		printf("%d ", list->array[i].elems[j].price);
-		printf("\n");
-	}
-	
+	/*for (int i = 0; i < list->size; i++)
+		for (int j = 0; j < list->array[i].size; j++)
+		{
+			printf("%s ", list->array[i].elems[j].name);
+			printf("%d ", list->array[i].elems[j].concentration);
+			printf("%d ", list->array[i].elems[j].quantity);
+			printf("%d ", list->array[i].elems[j].price);
+			printf("\n");
+		}
+		*/
 	return 0;
 }
 
@@ -238,7 +239,36 @@ void defaultpharmacy(DynamicArray* pharmacy, UndoList* undoList)
 	addMedicine(pharmacy, "VitaminK", 90, 1, 50);
 }
 
-int Redo(DynamicArray* medicineList, UndoList* redoList)
+int Redo(UndoList* redoList, UndoList* undoList, DynamicArray* MedicineList)
 {
-	
+	/*
+	  I want to redo the last undo operation
+	*/
+	if (redoList->size == 0)
+		return 1;
+	addUndoList(undoList, MedicineList);
+	/*for (int i = 0; i < redoList->size; i++)
+		for (int j = 0; j < redoList->array[i].size; j++)
+		{
+			printf("%s ", redoList->array[i].elems[j].name);
+			printf("%d ", redoList->array[i].elems[j].concentration);
+			printf("%d ", redoList->array[i].elems[j].quantity);
+			printf("%d ", redoList->array[i].elems[j].price);
+			printf("\n");
+		}*/
+	MedicineList->elems = (Medicine*)realloc(MedicineList->elems, sizeof(Medicine) * redoList->array[redoList->size - 1].capacity);
+	if (MedicineList->elems == NULL)
+		return 1;
+	MedicineList->size = redoList->array[redoList->size - 1].size;
+	MedicineList->capacity = redoList->array[redoList->size - 1].capacity;
+
+	for (int i = 0; i < MedicineList->size; i++)
+	{
+		MedicineList->elems[i].concentration = redoList->array[redoList->size - 1].elems[i].concentration;
+		MedicineList->elems[i].price = redoList->array[redoList->size - 1].elems[i].price;
+		MedicineList->elems[i].name = redoList->array[redoList->size - 1].elems[i].name;
+		MedicineList->elems[i].quantity = redoList->array[redoList->size - 1].elems[i].quantity;
+	}
+	redoList->size--;
+	return 0;
 }

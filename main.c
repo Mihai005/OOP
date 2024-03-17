@@ -12,7 +12,7 @@
 int main()
 {
     char option;
-    DynamicArray *pharmacy;
+    DynamicArray* pharmacy;
     pharmacy = createDynamicArray(10);
     UndoList* undoList;
     undoList = createUndoList(10);
@@ -47,14 +47,15 @@ int main()
             updateMedicinePriceUI(pharmacy, undoList);
             break;
         case 'h':
-            UndoUI(pharmacy, undoList);
+            UndoUI(pharmacy, undoList, redoList);
             break;
         case 'i':
-            RedoUI(pharmacy, redoList);
+            RedoUI(pharmacy, redoList, undoList);
             break;
         case 'j':
             destroyDynamicArray(pharmacy);
             destroyUndoList(undoList);
+            destroyUndoList(redoList);
             _CrtDumpMemoryLeaks();
             exit(0);
         default:
@@ -62,5 +63,5 @@ int main()
         }
     } while (1);
 
-	return 0;
+    return 0;
 }

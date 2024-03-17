@@ -13,7 +13,7 @@ int updateMedicineConcentration(char* name, int concentration, int new_concentra
 int updateMedicineQuantity(char* name, int concentration, int new_quantity, DynamicArray* MedicineList, UndoList* undoList);
 int updateMedicinePrice(char* name, int concentration, int new_price, DynamicArray* MedicineList, UndoList* undoList);
 void searchMedicine(DynamicArray* MedicineList, char* name, DynamicArray* searchList);
-int Undo(DynamicArray* medicineList, UndoList* undoList);
+int Undo(DynamicArray* MedicineList, UndoList* undoList, UndoList* redoList);
 int addUndoList(UndoList* undoList, DynamicArray* medicineList);
 void defaultpharmacy(DynamicArray* MedicineList, UndoList* undoList);
-int Redo(DynamicArray* medicineList, UndoList* redoList);
+int Redo(UndoList* redoList, UndoList* undoList, DynamicArray* MedicineList);

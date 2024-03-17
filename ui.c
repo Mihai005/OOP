@@ -79,9 +79,9 @@ void searchMedicineUI(DynamicArray* medicineList)
     DynamicArray* searchList = createDynamicArray(10);
     searchMedicine(medicineList, name, searchList);
     for (int i = 0; i < searchList->size; i++)
-	{
-		printMedicine(&searchList->elems[i]);
-	}
+    {
+        printMedicine(&searchList->elems[i]);
+    }
     destroyDynamicArray(searchList);
 }
 
@@ -107,36 +107,36 @@ void updateMedicineConcentrationUI(DynamicArray* medicineList, UndoList* undoLis
 {
     char name[50];
     printf("Enter the name of the medicine: ");
-	scanf("%s", name);
-	int concentration;
-	printf("Enter the concentration of the medicine: ");
-	scanf("%d", &concentration);
-	int new_concentration;
-	printf("Enter the new concentration of the medicine: ");
-	scanf("%d", &new_concentration);
-	int value = updateMedicineConcentration(name, concentration, new_concentration, medicineList, undoList);
-	if (value == 1)
-		printf("Medicine concentration updated successfully!\n");
-	else
-		printf("Medicine not found!\n");
+    scanf("%s", name);
+    int concentration;
+    printf("Enter the concentration of the medicine: ");
+    scanf("%d", &concentration);
+    int new_concentration;
+    printf("Enter the new concentration of the medicine: ");
+    scanf("%d", &new_concentration);
+    int value = updateMedicineConcentration(name, concentration, new_concentration, medicineList, undoList);
+    if (value == 1)
+        printf("Medicine concentration updated successfully!\n");
+    else
+        printf("Medicine not found!\n");
 }
 
 void updateMedicineQuantityUI(DynamicArray* medicineList, UndoList* undoList)
 {
     char name[50];
     printf("Enter the name of the medicine: ");
-	scanf("%s", name);
-	int concentration;
-	printf("Enter the concentration of the medicine: ");
-	scanf("%d", &concentration);
-	int new_quantity;
-	printf("Enter the new quantity of the medicine: ");
-	scanf("%d", &new_quantity);
-	int value = updateMedicineQuantity(name, concentration, new_quantity, medicineList, undoList);
-	if (value == 1)
-		printf("Medicine quantity updated successfully!\n");
-	else
-		printf("Medicine not found!\n");
+    scanf("%s", name);
+    int concentration;
+    printf("Enter the concentration of the medicine: ");
+    scanf("%d", &concentration);
+    int new_quantity;
+    printf("Enter the new quantity of the medicine: ");
+    scanf("%d", &new_quantity);
+    int value = updateMedicineQuantity(name, concentration, new_quantity, medicineList, undoList);
+    if (value == 1)
+        printf("Medicine quantity updated successfully!\n");
+    else
+        printf("Medicine not found!\n");
 }
 
 void updateMedicinePriceUI(DynamicArray* medicineList, UndoList* undoList)
@@ -152,25 +152,25 @@ void updateMedicinePriceUI(DynamicArray* medicineList, UndoList* undoList)
     scanf("%d", &new_price);
     int value = updateMedicinePrice(name, concentration, new_price, medicineList, undoList);
     if (value == 1)
-		printf("Medicine price updated successfully!\n");
-	else
-		printf("Medicine not found!\n");
+        printf("Medicine price updated successfully!\n");
+    else
+        printf("Medicine not found!\n");
 }
 
-void UndoUI(DynamicArray* medicineList, UndoList* undoList)
+void UndoUI(DynamicArray* medicineList, UndoList* undoList, UndoList* redoList)
 {
-	int value = Undo(medicineList, undoList);
-	if (value == 0)
-		printf("Undo successful!\n");
-	else
-		printf("Nothing to undo!\n");
+    int value = Undo(medicineList, undoList, redoList);
+    if (value == 0)
+        printf("Undo successful!\n");
+    else
+        printf("Nothing to undo!\n");
 }
 
-void RedoUI(DynamicArray* medicineList, UndoList* redoList)
+void RedoUI(DynamicArray* medicineList, UndoList* redoList, UndoList* undoList)
 {
-    int value = Redo(medicineList, redoList);
-	if (value == 0)
-		printf("Redo successful!\n");
-	else
-		printf("Nothing to redo!\n");
+    int value = Redo(redoList, undoList, medicineList);
+    if (value == 0)
+        printf("Redo successful!\n");
+    else
+        printf("Nothing to redo!\n");
 }

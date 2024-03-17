@@ -12,5 +12,5 @@ void updateMedicineNameUI(DynamicArray* medicineList, UndoList* undoList);
 void updateMedicineConcentrationUI(DynamicArray* medicineList, UndoList* undoList);
 void updateMedicineQuantityUI(DynamicArray* medicineList, UndoList* undoList);
 void updateMedicinePriceUI(DynamicArray* medicineLIst, UndoList* undoList);
-void UndoUI(DynamicArray* medicineList, UndoList* undoList);
-void RedoUI(DynamicArray* medicineList, UndoList* redoList);
+void UndoUI(DynamicArray* medicineList, UndoList* undoList, UndoList* redoList);
+void RedoUI(DynamicArray* medicineList, UndoList* redoList, UndoList* undoList);

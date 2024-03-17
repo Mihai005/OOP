@@ -1,5 +1,6 @@
 #include "DynamicArray.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 DynamicArray* createDynamicArray(int maxcapacity)
 {
@@ -19,8 +20,9 @@ void destroyDynamicArray(DynamicArray* arr)
 {
 	if (arr == NULL)
 		return;
+
 	for (int i = 0; i < arr->size; i++)
-		free(arr->elems[i].name);
+		 free(arr->elems[i].name);
 	free(arr->elems);
     free(arr);
 }
@@ -36,13 +38,13 @@ void resize(DynamicArray* arr)
 	arr->elems = aux;
 }
 
-/*void addElemToDyamicArray(DynamicArray* arr, Medicine elem)
+void addElemToDyamicArray(DynamicArray* arr, Medicine elem)
 {
 	if (arr->capacity == arr->size)
 		resize(arr);
 	arr->elems[arr->size++] = elem;
 }
-*/
+
 int getSize(DynamicArray* arr)
 {
 	if (arr == NULL)

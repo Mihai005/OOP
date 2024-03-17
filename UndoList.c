@@ -1,5 +1,6 @@
 #include "UndoList.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 UndoList* createUndoList(int maxcapacity)
 {
@@ -10,7 +11,7 @@ UndoList* createUndoList(int maxcapacity)
 	list->size = 0;
 	list->array = malloc(sizeof(DynamicArray) * maxcapacity);
 	if (list->array == NULL)
-		return NULL;
+		return ((void*)0);
 	return list;
 }
 
@@ -37,8 +38,7 @@ void destroyUndoList(UndoList* list)
 {
 	if (list == NULL)
 		return;
+
 	for (int i = 0; i < list->size; i++)
 		destroyDynamicArray(&list->array[i]);
-	free(list->array);
-	free(list);
 }
