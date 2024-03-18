@@ -17,3 +17,4 @@ int Undo(DynamicArray* MedicineList, UndoList* undoList, UndoList* redoList);
 int addUndoList(UndoList* undoList, DynamicArray* medicineList);
 void defaultpharmacy(DynamicArray* MedicineList, UndoList* undoList);
 int Redo(UndoList* redoList, UndoList* undoList, DynamicArray* MedicineList);
+void testservice();

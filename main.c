@@ -11,6 +11,9 @@
 
 int main()
 {
+    testdomain();
+    //testservice();
+    //testundolist();
     char option;
     DynamicArray* pharmacy;
     pharmacy = createDynamicArray(10);

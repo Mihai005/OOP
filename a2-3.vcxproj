@@ -136,7 +136,6 @@
     <ClCompile Include="main.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_CONSOLE;%(PreprocessorDefinitions) </PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="repository.c" />
     <ClCompile Include="service.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -148,7 +147,6 @@
   <ItemGroup>
     <ClInclude Include="Domain.h" />
     <ClInclude Include="DynamicArray.h" />
-    <ClInclude Include="repository.h" />
     <ClInclude Include="service.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="UndoList.h" />

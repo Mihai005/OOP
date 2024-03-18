@@ -21,14 +21,20 @@ void printMenuUI()
 
 void printMedicine(Medicine* medicine)
 {
-    printf("Name: %s\n", medicine->name);
-    printf("Concentration: %d\n", medicine->concentration);
-    printf("Quantity: %d\n", medicine->quantity);
-    printf("Price: %d\n", medicine->price);
+    printf("Name: %s\n", get_name(medicine));
+    printf("Concentration: %d\n", get_concentration(medicine));
+    printf("Quantity: %d\n", get_quantity(medicine));
+    printf("Price: %d\n", get_price(medicine));
 }
 
 void addMedicineUI(DynamicArray* medicineList, UndoList* undoList)
 {
+    /*
+       Function that reads the data for a medicine and adds it to the list
+       Input: medicineList - pointer to the list of medicines
+			  undoList - pointer to the list of undo operations
+       Output: the medicine is added to the list or the quantity of the medicine is updated or an error message is displayed
+    */
     char name[50];
     int concentration;
     int quantity;
@@ -55,6 +61,12 @@ void addMedicineUI(DynamicArray* medicineList, UndoList* undoList)
 
 void deleteMedicineUI(DynamicArray* medicineList, UndoList* undoList)
 {
+    /*
+       Function that reads the data for a medicine and deletes it from the list
+       Input: medicineList - pointer to the list of medicines
+       undoList - pointer to the list of undo operations
+       Output: the medicine is deleted from the list or an error message is displayed
+    */
     char name[50];
     int concentration;
     printf("Enter the name of the medicine: ");
@@ -71,6 +83,11 @@ void deleteMedicineUI(DynamicArray* medicineList, UndoList* undoList)
 
 void searchMedicineUI(DynamicArray* medicineList)
 {
+    /*
+       Function that reads the name of a medicine or a partial string and searches for all the matches in the list
+       Input: medicineList - pointer to the list of medicines
+       Output: the medicin(e/s) is/are found and displayed or an error message is displayed
+    */
     clear_input_buffer();
     char name[50];
     printf("Enter the name of the medicine: ");
@@ -78,15 +95,21 @@ void searchMedicineUI(DynamicArray* medicineList)
     name[strcspn(name, "\n")] = '\0';
     DynamicArray* searchList = createDynamicArray(10);
     searchMedicine(medicineList, name, searchList);
-    for (int i = 0; i < searchList->size; i++)
+    for (int i = 0; i < getSize(searchList); i++)
     {
-        printMedicine(&searchList->elems[i]);
+        printMedicine(getElement(searchList, i));
     }
     destroyDynamicArray(searchList);
 }
 
 void updateMedicineNameUI(DynamicArray* medicineList, UndoList* undoList)
 {
+    /*
+       Function that reads the data for a medicine and updates its name
+       Input: medicineList - pointer to the list of medicines
+       undoList - pointer to the list of undo operations
+       Output: the name of the medicine is updated or an error message is displayed
+    */
     char name[50];
     printf("Enter the name of the medicine: ");
     scanf("%s", name);
@@ -105,6 +128,12 @@ void updateMedicineNameUI(DynamicArray* medicineList, UndoList* undoList)
 
 void updateMedicineConcentrationUI(DynamicArray* medicineList, UndoList* undoList)
 {
+    /*
+       Function that reads the data for a medicine and updates its concentration
+       Input: medicineList - pointer to the list of medicines
+       undoList - pointer to the list of undo operations
+       Output: the concentration of the medicine is updated or an error message is displayed
+    */
     char name[50];
     printf("Enter the name of the medicine: ");
     scanf("%s", name);
@@ -123,6 +152,12 @@ void updateMedicineConcentrationUI(DynamicArray* medicineList, UndoList* undoLis
 
 void updateMedicineQuantityUI(DynamicArray* medicineList, UndoList* undoList)
 {
+    /*
+       Function that reads the data for a medicine and updates its quantity
+       Input: medicineList - pointer to the list of medicines
+       undoList - pointer to the list of undo operations
+       Output: the quantity of the medicine is updated or an error message is displayed
+    */
     char name[50];
     printf("Enter the name of the medicine: ");
     scanf("%s", name);
@@ -141,6 +176,12 @@ void updateMedicineQuantityUI(DynamicArray* medicineList, UndoList* undoList)
 
 void updateMedicinePriceUI(DynamicArray* medicineList, UndoList* undoList)
 {
+    /*
+	   Function that reads the data for a medicine and updates its price
+	   Input: medicineList - pointer to the list of medicines
+	   undoList - pointer to the list of undo operations
+	   Output: the price of the medicine is updated or an error message is displayed
+	*/
     char name[50];
     printf("Enter the name of the medicine: ");
     scanf("%s", name);
@@ -159,6 +200,13 @@ void updateMedicinePriceUI(DynamicArray* medicineList, UndoList* undoList)
 
 void UndoUI(DynamicArray* medicineList, UndoList* undoList, UndoList* redoList)
 {
+    /*
+	   Function that undoes the last operation
+	   Input: medicineList - pointer to the list of medicines
+	   undoList - pointer to the list of undo operations
+	   redoList - pointer to the list of redo operations
+	   Output: the last operation is undone or an error message is displayed
+	*/
     int value = Undo(medicineList, undoList, redoList);
     if (value == 0)
         printf("Undo successful!\n");
@@ -168,6 +216,13 @@ void UndoUI(DynamicArray* medicineList, UndoList* undoList, UndoList* redoList)
 
 void RedoUI(DynamicArray* medicineList, UndoList* redoList, UndoList* undoList)
 {
+    /*
+      Function that redoes the last operation
+      Input: medicineList - pointer to the list of medicines
+      redoList - pointer to the list of redo operations
+      undoList - pointer to the list of undo operations
+      Output: the last operation is redone or an error message is displayed
+    */
     int value = Redo(redoList, undoList, medicineList);
     if (value == 0)
         printf("Redo successful!\n");

@@ -1,6 +1,9 @@
 #include "UndoList.h"
+#include "DynamicArray.h"
+#include "Domain.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 UndoList* createUndoList(int maxcapacity)
 {
@@ -38,9 +41,14 @@ void destroyUndoList(UndoList* list)
 {
 	if (list == NULL)
 		return;
-
 	for (int i = 0; i < get_size_undo(list); i++)
-		destroyDynamicArray(&list->array[i]);
+	{
+		for (int j = 0; j < getSize(get_undo_array(list, i)); j++)
+			free(get_name(&get_undo_array(list, i)->elems[j]));
+		free(getElems(get_undo_array(list, i)));
+	}
+    free(list->array);
+	free(list);
 }
 
 int get_size_undo(UndoList* list)
@@ -61,4 +69,47 @@ void set_size_undo(UndoList* list, int size)
 void set_capacity_undo(UndoList* list, int capacity)
 {
 	list->capacity = capacity;
+}
+
+DynamicArray* get_undo_array(UndoList* list, int position)
+{
+	return &list->array[position];
+}
+
+void decreaseUndoListSize(UndoList* list, int newSize) {
+	if (newSize >= list->size) {
+		return;  // Nothing to do
+	}
+
+	for (int i = newSize; i < list->size; i++) {
+		// Free any dynamically allocated memory in each element
+		printf("1");
+		for (int j = 0; j < list->array[i].size; j++) {
+			free(list->array[i].elems[j].name);
+		}
+		free(list->array[i].elems);
+	}
+
+	// Adjust the size of the undo list
+	list->size = newSize;
+}
+
+void testundolist()
+{
+	UndoList* list;
+	list = createUndoList(10);
+	assert(get_capacity_undo(list) == 10);
+	assert(get_size_undo(list) == 0);
+	assert(get_size_undo(list) == 0);
+	assert(get_capacity_undo(list) == 10);
+	assert(get_size_undo(list) == 0);
+	destroyUndoList(list);
+	UndoList* redo;
+	redo = createUndoList(15);
+	assert(get_capacity_undo(redo) == 15);
+	assert(get_size_undo(redo) == 0);
+	assert(get_size_undo(redo) == 0);
+	assert(get_capacity_undo(redo) == 15);
+	assert(get_size_undo(redo) == 0);
+	destroyUndoList(redo);
 }
