@@ -12,3 +12,8 @@ UndoList* createUndoList(int maxcapacity);
 void resizeUndo(UndoList* list);
 void removeUndoList(UndoList* list);
 void destroyUndoList(UndoList* list);
+
+int get_size_undo(UndoList* list);
+int get_capacity_undo(UndoList* list);
+void set_size_undo(UndoList* list, int size);
+void set_capacity_undo(UndoList* list, int capacity);

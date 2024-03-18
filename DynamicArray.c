@@ -1,6 +1,7 @@
 #include "DynamicArray.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 DynamicArray* createDynamicArray(int maxcapacity)
 {
@@ -59,3 +60,26 @@ int getCapacity(DynamicArray* arr)
 	return arr->capacity;
 }
 
+void setSize(DynamicArray* arr, int size)
+{
+	arr->size = size;
+}
+
+void setCapacity(DynamicArray* arr, int capacity)
+{
+	arr->capacity = capacity;
+}
+
+Medicine* getElement(DynamicArray* arr, int index)
+{
+	return &arr->elems[index];
+}
+
+void setElement(DynamicArray* arr, int position, char* name, int concentration, int quantity, int price)
+{
+	arr->elems[position].name = (char*)malloc(sizeof(char) * strlen(name) + 1);
+	arr->elems[position].concentration = concentration;
+	strcpy(arr->elems[position].name, name);
+	arr->elems[position].price = price;
+	arr->elems[position].quantity = quantity;
+}
