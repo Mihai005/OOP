@@ -1,71 +1,95 @@
 #include "Domain.h"
 #include <iostream>
 #include <string.h>
+#include <cassert>
 
 Dog::Dog()
 {
-	this->breed = NULL;
-	this->name = NULL;
+	/// initializes an empty dog
+	this->breed = "";
+	this->name = "";
 	this->age = 0;
-	this->photograph = NULL;
+	this->photograph = "";
 }
 
-void Dog::CreateDog(char* breed, char* name, int age, char* photograph)
+void Dog::CreateDog(string breed, string name, int age, string photograph)
 {
-	this->breed = new char[strlen(breed) + 1];
-	strcpy(this->breed, breed);
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	/// creates a dog with the given parameters
+	this->breed = breed;
+	this->name = name;
 	this->age = age;
-	this->photograph = new char[strlen(photograph) + 1];
-	strcpy(this->photograph, photograph);
+	this->photograph = photograph;
 }
 
-const char* Dog::getBreed()
+const string Dog::getBreed()
 {
+	/// returns the breed of the dog
 	return this->breed;
 }
 
-const char* Dog::getName()
+const string Dog::getName()
 {
+	/// returns the name of the dog
 	return this->name;
 }
 
 const int Dog::getAge()
 {
+	/// returns the age of the dog
 	return this->age;
 }
 
-const char* Dog::getPhotograph()
+const string Dog::getPhotograph()
 {
+	/// returns the photograph of the dog
 	return this->photograph;
 }
 
-void Dog::setBreed(char* b)
+void Dog::setBreed(string b)
 {
-	this->breed = new char[strlen(b) + 1];
-	strcpy(this->breed, b);
+	/// sets the breed of the dog
+	this->breed = b;
 }
 
-void Dog::setName(char* n)
+void Dog::setName(string n)
 {
-	this->name = new char[strlen(n) + 1];
-	strcpy(this->name, n);
+	/// sets the name of the dog
+	this->name = n;
 }
 
 void Dog::setAge(int a)
 {
+	/// sets the age of the dog
 	this->age = a;
 }
 
-void Dog::setPhotograph(char* p)
+void Dog::setPhotograph(string p)
 {
+	/// sets the photograph of the dog
 	this->photograph = p;
 }
 
 Dog::~Dog()
 {
-	delete[] breed;
-	delete[] name;
-	delete[] photograph;
+	/// destructor
+} 
+
+
+void Dog::testDomain()
+{
+	Dog d = Dog();
+	d.CreateDog("Breed", "Name", 10, "https://testdog.com");
+	assert(d.getBreed() == "Breed");
+	assert(d.getName() == "Name");
+	assert(d.getAge() == 10);
+	assert(d.getPhotograph() == "https://testdog.com");
+	d.setBreed("Breed2");
+	d.setName("Name2");
+	d.setAge(20);
+	d.setPhotograph("https://alink.com");
+	assert(d.getBreed() == "Breed2");
+	assert(d.getName() == "Name2");
+	assert(d.getAge() == 20);
+	assert(d.getPhotograph() == "https://alink.com");
+	cout << "Domain tests passed successfully!\n";
 }

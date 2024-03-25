@@ -6,23 +6,23 @@ using namespace std;
 
 class Dog {
 private:
-	char* breed;
-	char* name;
-	char* photograph; 
+	string breed;
+	string name;
+	string photograph; 
 	int age;
 
 public:
 	Dog();
-	void CreateDog(char* breed, char* name, int age, char* photograph);
-	const char* getBreed();
-	const char* getName();
+	void CreateDog(string breed, string name, int age, string photograph);
+	const string getBreed();
+	const string getName();
 	const int getAge();
-	const char* getPhotograph();
+	const string getPhotograph();
 
-	void setBreed(char* b);
-	void setName(char* n);
+	void setBreed(string b);
+	void setName(string n);
 	void setAge(int a);
-	void setPhotograph(char* p);
+	void setPhotograph(string p);
 
 	string Representation() const {
 		string representation = "Breed: ";
@@ -37,8 +37,10 @@ public:
 	}
 
 	bool operator==(const Dog& d) {
-		return strcmp(this->name, d.name) == 0 && strcmp(this->breed, d.breed) == 0 && this->age == d.age;
+		return ((this->name == d.name) && (this->breed == d.breed) && (this->age == d.age));
 	}
 
 	~Dog();
+
+	void testDomain();
 };

@@ -19,12 +19,13 @@ public:
 	TElem* getElements();
 	TElem* getElement(int pos);
 
-	TElem* setElement();
-	void addElement(TElem* e);
+	void addElement(TElem e);
 	void deleteElement(TElem* e);
 
 	// create copy constructor
     DynamicVector(const DynamicVector& v);
 
 	~DynamicVector();
+
+	void testDynamicVector();
 };

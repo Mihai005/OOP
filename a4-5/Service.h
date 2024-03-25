@@ -10,11 +10,17 @@ public:
 	int getSizeService();
 	Dog* getElement();
 
-	Dog* searchDogService(char name[20], char breed[20], int age);
-	void updateBreedService(Dog* d, char breed[20]);
-	void updateNameService(Dog* d, char name[20]);
+	Dog* searchDogService(string name, string breed, int age);
+	void updateBreedService(Dog* d, string breed);
+	void updateNameService(Dog* d, string name);
 	void updateAgeService(Dog* d, int age);
 
 	void removeDogService(Dog* d);
-	void addDogService(Dog* d);
+	void addDogService(Dog d);
+    
+	int checkInput(string breed, string name, int age, string link);
+	int checkAlreadyExists(Dog d);
+	~Service();
+
+	void testService();
 };

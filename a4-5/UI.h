@@ -9,10 +9,11 @@ class UI {
 private:
 	Service service = Service();
 public: 
-	void run();
+	int run();
+	~UI();
 private:
-	void choosemode(std::string& option);
-	void printMenuAdmin(int& optionadmin);
+	void choosemode(string& option);
+	void printMenuAdmin(string& optionadmin);
 	void printMenuUser(int& optionuser);
 	void defaultshelter();
 
@@ -20,4 +21,5 @@ private:
 	void addDogUI();
 	void deleteDogUI();
 	void updateDogUI();
+
 };
