@@ -14,12 +14,16 @@ public:
 private:
 	void choosemode(string& option);
 	void printMenuAdmin(string& optionadmin);
-	void printMenuUser(int& optionuser);
+	void printMenuUser(string& optionuser);
 	void defaultshelter();
 
 	void printDogsUI();
 	void addDogUI();
 	void deleteDogUI();
 	void updateDogUI();
+
+	void printDogsUserUI();
+	void printDogsByBreedUI();
+	void printAdoptionListUI();
 
 };

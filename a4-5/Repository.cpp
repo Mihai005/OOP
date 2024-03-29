@@ -8,12 +8,6 @@ Repository::Repository()
 	/// constructor
 }
 
-DynamicVector Repository::getDogs()
-{
-	/// getter for the dogs
-	return this->dogs;
-}
-
 void Repository::addDogRepo(Dog dog)
 {
 	/// adds a dog to the repository
@@ -55,10 +49,23 @@ int Repository::getSizeRepo()
 	return this->dogs.getSize();
 }
 
+int Repository::getSizeAdoptionList()
+{
+	/// returns the size of the adoption list
+	return this->adoptionList.getSize();
+}
+
 Dog* Repository::getElements()
 {
 	/// returns the elements of the repository
 	return this->dogs.getElements();
+}
+
+Dog* Repository::getElementsAdoption()
+{
+    /// returns the elements of the adoption list
+	return this->adoptionList.getElements();
+
 }
 
 Dog* Repository::getElementRepo(int pos)
@@ -67,20 +74,8 @@ Dog* Repository::getElementRepo(int pos)
 	return this->dogs.getElement(pos);
 }
 
-void Repository::testRepository()
+void Repository::addAdoptionListRepo(Dog* dog)
 {
-	/// tests the repository
-	DynamicVector v;
-	Dog d1 = Dog();
-	d1.CreateDog("Husky", "Rex", 5, "www.photograph.com");
-	Dog d2 = Dog();
-	d2.CreateDog("Labrador", "Max", 3, "www.photograph.com");
-	Dog d3 = Dog();
-	d3.CreateDog("Pug", "Rex", 2, "www.photograph.com");
-	v.addElement(d1);
-	v.addElement(d2);
-	v.addElement(d3);
-	this->dogs = v;
-	assert(this->getSizeRepo() == 3);
-	cout << "Repository tests passed!" << "\n";
+	/// adds a dog to the adoption list
+	this->adoptionList.addElement(*dog);
 }

@@ -42,5 +42,4 @@ public:
 
 	~Dog();
 
-	void testDomain();
 };

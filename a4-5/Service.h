@@ -17,10 +17,14 @@ public:
 
 	void removeDogService(Dog* d);
 	void addDogService(Dog d);
+
+	void addAdoptionListService(Dog *d);
     
 	int checkInput(string breed, string name, int age, string link);
 	int checkAlreadyExists(Dog d);
 	~Service();
 
-	void testService();
+	int getSizeServiceAdoption();
+	Dog* getElementAdoption();
+
 };

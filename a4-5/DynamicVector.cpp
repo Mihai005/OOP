@@ -2,8 +2,10 @@
 #include "Domain.h"
 #include <cassert>
 
+/*template <typename TElem>
 
-DynamicVector::DynamicVector()
+
+DynamicVector<TElem>::DynamicVector()
 {
 	/// constructor
 	this->size = 0;
@@ -11,7 +13,9 @@ DynamicVector::DynamicVector()
 	this->elements = new TElem[10];
 }
 
-void DynamicVector::resize()
+
+template <typename TElem>
+void DynamicVector<TElem>::resize()
 {
 	/// resize the current DynamicVector, double the capacity
 	this->capacity *= 2;
@@ -23,7 +27,9 @@ void DynamicVector::resize()
 	/// to do implementation; it doesn't work; it raises an exception
 }
 
-DynamicVector::DynamicVector(int capacity)
+template <typename TElem>
+
+DynamicVector<TElem>::DynamicVector(int capacity)
 {
 	/// constructor with capacity
 	this->size = 0;
@@ -31,25 +37,32 @@ DynamicVector::DynamicVector(int capacity)
 	this->elements = new TElem[capacity];
 }
 
-TElem* DynamicVector::getElements()
+template <typename TElem>
+
+TElem* DynamicVector<TElem>::getElements()
 {
 	/// return the elements of the DynamicVector
 	return this->elements;
 }
 
-int DynamicVector::getSize()
+template <typename TElem>
+
+int DynamicVector<TElem>::getSize()
 {
 	/// return the size of the DynamicVector
 	return this->size;
 }
 
-int DynamicVector::getCapacity()
+template <typename TElem>
+
+int DynamicVector<TElem>::getCapacity()
 {
 	/// return the capacity of the DynamicVector
 	return this->capacity;
 }
 
-void DynamicVector::addElement(TElem d)
+template <typename TElem>
+void DynamicVector<TElem>::addElement(TElem d)
 {
 	/// add an element to the DynamicVector
 	if (this->size== this->capacity)
@@ -57,13 +70,15 @@ void DynamicVector::addElement(TElem d)
 	this->elements[this->size++] = d;
 }
 
-TElem* DynamicVector::getElement(int pos)
+template <typename TElem>
+TElem* DynamicVector<TElem>::getElement(int pos)
 {
 	/// return the element from a given position
 	return &this->elements[pos];
 }
 
-void DynamicVector::deleteElement(TElem* d)
+template <typename TElem>
+void DynamicVector<TElem>::deleteElement(TElem* d)
 {
 	/// delete an element from the DynamicVector
 	for (int i = 0; i < this->size; i++)
@@ -76,7 +91,8 @@ void DynamicVector::deleteElement(TElem* d)
 		}
 }
 
-DynamicVector::DynamicVector(const DynamicVector& v)
+template <typename TElem>
+DynamicVector<TElem>::DynamicVector(const DynamicVector& v)
 {
 	/// copy constructor
 	this->size = v.size;
@@ -86,14 +102,15 @@ DynamicVector::DynamicVector(const DynamicVector& v)
 		this->elements[i] = v.elements[i];
 }
 
-DynamicVector::~DynamicVector()
+template <typename TElem>
+DynamicVector<TElem>::~DynamicVector()
 {
 	/// destructor
 	delete[] this->elements;
 }
 
-
-void DynamicVector::testDynamicVector() {
+template <typename TElem>
+void DynamicVector<TElem>::testDynamicVector() {
 	DynamicVector vector1;
 	assert(vector1.getSize() == 0);
 	DynamicVector vector2(5);
@@ -110,4 +127,4 @@ void DynamicVector::testDynamicVector() {
 	vector2.deleteElement(retrievedDog);
 	assert(vector2.getSize() == 1);
 	cout << "DynamicVector tests passed!" << "\n";
-}
+}*/

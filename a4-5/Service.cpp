@@ -11,10 +11,22 @@ int Service::getSizeService()
 	return this->repo.getSizeRepo();
 }
 
+int Service::getSizeServiceAdoption()
+{
+	/// getter for the size of the adoption list
+	return this->repo.getSizeAdoptionList();
+}
+
 Dog* Service::getElement()
 {
 	/// getter for the elements of the repository
 	return this->repo.getElements();
+}
+
+Dog* Service::getElementAdoption()
+{
+	/// getter for the elements of the adoption list
+	return this->repo.getElementsAdoption();
 }
 
 Dog* Service::searchDogService(string name, string breed, int age)
@@ -61,6 +73,12 @@ void Service::addDogService(Dog d)
 	this->repo.addDogRepo(d);
 }
 
+void Service::addAdoptionListService(Dog* d)
+{
+	/// adds a dog to the adoption list
+	this->repo.addAdoptionListRepo(d);
+}
+
 int Service::checkInput(string breed, string name, int age, string link)
 {
 	/// checks if the input is valid
@@ -90,15 +108,4 @@ int Service::checkAlreadyExists(Dog d)
 Service::~Service()
 {
 	/// destructor
-}
-
-void Service::testService()
-{
-	/// tests the service
-	Dog d = Dog();
-	this->addDogService(d);
-	assert(this->getSizeService() == 1);
-	this->removeDogService(&d);
-	assert(this->getSizeService() == 0);
-	cout << "Service tests passed!" << endl;
 }

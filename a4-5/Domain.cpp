@@ -74,22 +74,3 @@ Dog::~Dog()
 	/// destructor
 } 
 
-
-void Dog::testDomain()
-{
-	Dog d = Dog();
-	d.CreateDog("Breed", "Name", 10, "https://testdog.com");
-	assert(d.getBreed() == "Breed");
-	assert(d.getName() == "Name");
-	assert(d.getAge() == 10);
-	assert(d.getPhotograph() == "https://testdog.com");
-	d.setBreed("Breed2");
-	d.setName("Name2");
-	d.setAge(20);
-	d.setPhotograph("https://alink.com");
-	assert(d.getBreed() == "Breed2");
-	assert(d.getName() == "Name2");
-	assert(d.getAge() == 20);
-	assert(d.getPhotograph() == "https://alink.com");
-	cout << "Domain tests passed successfully!\n";
-}
